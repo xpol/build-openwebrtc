@@ -8,8 +8,8 @@ branches:
 before_install:
   - cd ~
   - git clone https://github.com/EricssonResearch/cerbero.git
-  - mkdir /Library/Frameworks/OpenWebRTC.framework
-  - chown $UID /Library/Frameworks/OpenWebRTC.framework/
+  - sudo mkdir /Library/Frameworks/OpenWebRTC.framework
+  - sudo chown $UID /Library/Frameworks/OpenWebRTC.framework/
   - cd ~/cerbero:
   - mkdir -p dist
   - mkdir -p /Library/Frameworks/OpenWebRTC.framework/Versions/0.1
