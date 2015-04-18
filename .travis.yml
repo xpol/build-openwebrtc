@@ -1,0 +1,32 @@
+language: objective-c
+
+
+branches:
+  only:
+    - master
+
+before_install:
+  - cd ~
+  - git clone https://github.com/EricssonResearch/cerbero.git
+  - mkdir /Library/Frameworks/OpenWebRTC.framework
+  - chown $UID /Library/Frameworks/OpenWebRTC.framework/
+  - cd ~/cerbero:
+  - mkdir -p dist
+  - mkdir -p /Library/Frameworks/OpenWebRTC.framework/Versions/0.1
+  - ln -s /Library/Frameworks/OpenWebRTC.framework/Versions/0.1 dist/darwin_x86_64
+
+install:
+  - cd ~/cerbero
+  - ./cerbero-uninstalled -c config/osx-x86-64.cbc bootstrap
+  - ./cerbero-uninstalled -c config/cross-ios-universal.cbc bootstrap
+
+script:
+  - cd ~/cerbero
+  - ./cerbero-uninstalled -c config/osx-x86-64.cbc package -f openwebrtc
+  - ./cerbero-uninstalled -c config/cross-ios-universal.cbc package -f openwebrtc
+  - ls
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
